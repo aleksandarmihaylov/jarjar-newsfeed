@@ -4,23 +4,24 @@ import moment from 'moment';
 import '../App.css';
 
 export default class Comment extends React.PureComponent {
-  state = {
-    isCommentsOpen: false,
-  };
   renderComments = () => {
-    return this.props.map((comment, index) => {
-      return (
-        <div className="comments-list">
-          <ul key={index}>
-            <li>{comment.text}</li>
-            <li>{comment.by}</li>
-            <li>
-              <img src={comment.imageSrc} />
-            </li>
-          </ul>
-        </div>
-      );
-    });
+    if (this.props.show != true) {
+      return <div>The force is strong with this one</div>;
+    } else {
+      return this.props.comments.map((comment, index) => {
+        return (
+          <div>
+            <ul key={index}>
+              <li>{comment.text}</li>
+              <li>{comment.by}</li>
+              <li>
+                <img src={comment.imageSrc} />
+              </li>
+            </ul>
+          </div>
+        );
+      });
+    }
   };
   render() {
     return <div>{this.renderComments()}</div>;
